@@ -1,4 +1,4 @@
-###Feed Reader: Project 6  ccoelho1 10/11/2015
+###Feed Reader: Project 6  ccoelho1 10/12/2015
 
 Please visit my GitHub page "https://github.com/ccoelho1/Project_6.git"
 
