@@ -32,42 +32,41 @@ $(function() {
             });
         });
 
-        //added length to make sure it does not pass if empty string  
+        // added length to make sure it does not pass if empty string  
+        //C hanged from not.toBe(0) to .toBeGreaterThan(0)
         it('URL is not empty', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.url.length).not.toBe(0);
+                expect(feed.url.length).toBeGreaterThan(0);
             });
         });
-
         // test that loops through each feed
+        // updated the name to feed.name
         it('name defined', function() {
-            allFeeds.forEach(function(name) {
-                expect(name).toBeDefined();
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
             });
         });
-        //added length to make sure it does not pass if empty string  
+        // added length to make sure it does not pass if empty string  
+        // Changed from not.toBe(0) to .toBeGreaterThan(0)
         it('name is not empty', function() {
-            allFeeds.forEach(function(name) {
-                expect(name.length).not.toBe(0);
+            allFeeds.forEach(function(feed) {
+                expect(feed.name.length).toBeGreaterThan(0);
             });
         });
 
     });
-
     //test suite named "The menu" to make sure menu hides by default when clicked
     describe('The Menu', function() {
         it('hidden by default', function() {
             expect($('body').hasClass('menu-hidden')).toBeDefined();
         });
     });
-
     //test that ensures the menu changes visibility when the menu icon is clicked. 
     it('changes visibility when menu clicked', function() {
         $('.menu-icon-link').trigger('click');
         expect($('body').hasClass('menu-hidden')).toBe(false);
         $('.menu-icon-link').trigger('click');
     });
-
     //test suite named "Initial Entries" 
     describe('Initial Entries', function() {
         beforeEach(function(done) {
@@ -80,24 +79,25 @@ $(function() {
             done();
         });
     });
-
     //test suite named "New Feed Selection"
     //changed code to the .empty() per reviewer's recommendation and added the second loadfeed to make test more secure
+    //Changed this around again still not testing properly
     describe('New Feed Selection', function() {
         var entry1, entry2;
         beforeEach(function(done) {
-            entry1 = $('.feed a').empty();
+            $('feed').empty();
             loadFeed(0, function() {
+                entry1 = $('.feed .entry').html(); //added the `.html()` to extract the html content from the jQuery object.
+                loadFeed(1, function() {
+                entry2 = $('.feed .entry').html(); //added the `.html()` to extract the html content from the jQuery object.
                 done();
-            });
-            entry2 = $('.feed b').empty();
-            loadFeed(1, function() {
-                done();
+                });
             });
         });
         //test that ensures when a new feed is loaded 
+        //calling old entry not to be the same as the new entry
         it('the content changes when a new feed is loaded', function(done) {
-            expect($('.feed a').empty()).not.toBe($('.feed b').empty());
+            expect(entry1).not.toBe(entry2);
             done();
         });
         afterAll(function(done) {
