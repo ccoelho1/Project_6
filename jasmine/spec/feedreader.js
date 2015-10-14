@@ -33,7 +33,7 @@ $(function() {
         });
 
         // added length to make sure it does not pass if empty string  
-        //C hanged from not.toBe(0) to .toBeGreaterThan(0)
+        // Changed from not.toBe(0) to .toBeGreaterThan(0)
         it('URL is not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url.length).toBeGreaterThan(0);
@@ -66,6 +66,8 @@ $(function() {
         $('.menu-icon-link').trigger('click');
         expect($('body').hasClass('menu-hidden')).toBe(false);
         $('.menu-icon-link').trigger('click');
+        //added second expectation to make sure Menu changes when clicked
+        expect($('body').hasClass('menu-hidden')).toBe(true);
     });
     //test suite named "Initial Entries" 
     describe('Initial Entries', function() {
@@ -73,10 +75,9 @@ $(function() {
             loadFeed(0, done);
         });
         //this test ensures when the loadFeed is asynchronous
-        it('there is at least a single entry element in feed container', function(done) {
+        it('there is at least a single entry element in feed container', function() {
             var entry = $('.feed a').children('.entry');
             expect(entry.length).toBeGreaterThan(0);
-            done();
         });
     });
     //test suite named "New Feed Selection"
@@ -87,18 +88,19 @@ $(function() {
         beforeEach(function(done) {
             $('feed').empty();
             loadFeed(0, function() {
-                entry1 = $('.feed .entry').html(); //added the `.html()` to extract the html content from the jQuery object.
+                //added the `.html()` to extract the html content from the jQuery object.
+                entry1 = $('.feed .entry').html(); 
                 loadFeed(1, function() {
-                entry2 = $('.feed .entry').html(); //added the `.html()` to extract the html content from the jQuery object.
+                //added the `.html()` to extract the html content from the jQuery object.
+                entry2 = $('.feed .entry').html(); 
                 done();
                 });
             });
         });
         //test that ensures when a new feed is loaded 
         //calling old entry not to be the same as the new entry
-        it('the content changes when a new feed is loaded', function(done) {
+        it('the content changes when a new feed is loaded', function() {
             expect(entry1).not.toBe(entry2);
-            done();
         });
         afterAll(function(done) {
             loadFeed(0, done);
