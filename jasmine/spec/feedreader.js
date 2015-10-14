@@ -25,29 +25,29 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-        // test that loops through each feed
+        //test that loops through each feed
         it('URL defined', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
             });
         });
 
-        // added length to make sure it does not pass if empty string  
-        // Changed from not.toBe(0) to .toBeGreaterThan(0)
+        //added length to make sure it does not pass if empty string  
+        //Changed from not.toBe(0) to .toBeGreaterThan(0)
         it('URL is not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url.length).toBeGreaterThan(0);
             });
         });
-        // test that loops through each feed
-        // updated the name to feed.name
+        //test that loops through each feed
+        //updated the name to feed.name
         it('name defined', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
             });
         });
-        // added length to make sure it does not pass if empty string  
-        // Changed from not.toBe(0) to .toBeGreaterThan(0)
+        //added length to make sure it does not pass if empty string  
+        //Changed from not.toBe(0) to .toBeGreaterThan(0)
         it('name is not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name.length).toBeGreaterThan(0);
